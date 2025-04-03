@@ -2,12 +2,10 @@ FROM node:23-alpine
 
 RUN apk add --no-cache bash libc6-compat curl
 RUN npm install -g @angular/cli @ionic/cli
-RUN adduser -D appuser
+USER node
 WORKDIR /usr/src/app
 COPY . .
-RUN chown -R appuser:appuser /usr/src/app
-USER appuser
 
 EXPOSE 8100 4200
 
-ENTRYPOINT ["sh", "-c", "chown -R appuser:appuser /usr/src/app && ionic serve --host 0.0.0.0 --port 8100"]
+CMD ["ionic", "serve", "--host", "0.0.0.0", "--port", "8100", "--poll=3000"]
