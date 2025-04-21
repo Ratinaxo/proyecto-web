@@ -1,0 +1,112 @@
+
+  ion-content.register-page {
+    --background: #7a855e;
+
+    display: flex;
+    justify-content: center;   /* eje horizontal */
+    align-items: flex-start;    /* eje vertical al “inicio” */
+      /* <— ajusta este valor hasta que te guste */
+
+  
+    .top-text {
+      color: #2c2c2c;
+      text-align: center;
+      margin-bottom: 2rem;
+      margin-top: 6rem;
+
+      
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1.8rem;
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+    }
+    }
+
+
+
+
+    .form-container {
+      width: 90%;
+      max-width: 700px;
+      background: #e6eed9;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 0 auto; /* solo centrado horizontal */
+      margin-top: 2rem; /* solo centrado vertical */
+      
+    
+    }
+  
+    .fields-wrapper {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+  
+      .column {
+        flex: 1;
+  
+        .input-item {
+          --background: #ffffff;
+          --border-radius: 8px;
+          --border-radius: 2rem;
+          height: 3.7rem;
+          margin-bottom: 1rem;
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+
+          
+  
+          ion-label {
+            top: 0.6rem;
+            font-size: 0.9rem;
+            color:#000000;
+          }
+          ion-input {
+            font-size: 0.9rem;
+            color: #000000;
+          }
+  
+          /* padding extra para el select */
+          ion-select {
+            --padding-start: 0.75rem;
+            --padding-end: 0.75rem;
+            color:#000000;
+          }
+          ion-select .select-text {
+            padding-left: 0.75rem;
+          }
+        }
+  
+        .terms-item {
+          height: auto;
+          
+          padding-bottom: 0.5rem;
+          ion-checkbox {
+            --size: 1rem;
+          }
+          ion-label {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(0, 0, 0, 0.8);
+          }
+        }
+      }
+    }
+  
+    .register-button {
+      --background: #000000;
+      --border-radius: 6px;
+      height: 3.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+  }
+  
