@@ -1,24 +1,47 @@
 <ion-content class="register-page">
+  <div class="top-text">
+    <h1>Registro</h1>
+    <p>Se parte de nuestra comunidad</p>
+  </div>
 
-    <div class="top-text">
-      <h1>Registro</h1>
-      <p>Se parte de nuestra comunidad</p>
-    </div>
-
-  <div class="form-container">
-    <div class="fields-wrapper">
-      <!-- columna izquierda -->
-      <div class="column">
+  <ion-grid class="form-container">
+    <!-- fila 1 -->
+    <ion-row>
+      <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input placeholder="Juan"></ion-input>
         </ion-item>
+      </ion-col>
 
+      <ion-col >
+        <ion-item lines="none" class="input-item">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" placeholder="juan@gmail.com"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- fila 2 -->
+    <ion-row>
+      <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">RUT</ion-label>
           <ion-input placeholder="12.345.678‑9"></ion-input>
         </ion-item>
+      </ion-col>
 
+      <ion-col >
+        <ion-item lines="none" class="input-item">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" placeholder="••••••••"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- fila 3 -->
+    <ion-row>
+      <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Región</ion-label>
           <ion-select placeholder="Valparaíso">
@@ -26,7 +49,22 @@
             <ion-select-option>Metropolitana</ion-select-option>
           </ion-select>
         </ion-item>
+      </ion-col>
 
+      <ion-col >
+        <ion-item lines="none" class="input-item">
+          <ion-label position="floating">Confirmar contraseña</ion-label>
+          <ion-input type="password" placeholder="••••••••"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- fila 4 -->
+    <ion-row >
+
+
+      
+      <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Comuna</ion-label>
           <ion-select placeholder="Valparaíso">
@@ -34,32 +72,19 @@
             <ion-select-option>Viña del Mar</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
-
-      <!-- columna derecha -->
-      <div class="column">
-        <ion-item lines="none" class="input-item">
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" placeholder="juan@gmail.com"></ion-input>
-        </ion-item>
-
-        <ion-item lines="none" class="input-item">
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" placeholder="••••••••"></ion-input>
-        </ion-item>
-
-        <ion-item lines="none" class="input-item">
-          <ion-label position="floating">Confirmar contraseña</ion-label>
-          <ion-input type="password" placeholder="••••••••"></ion-input>
-        </ion-item>
-
+      </ion-col>
+      <ion-col >
         <ion-item lines="none" class="input-item terms-item">
           <ion-checkbox slot="start"></ion-checkbox>
           <ion-label>Acepta términos y condiciones</ion-label>
         </ion-item>
-      </div>
-    </div>
+      </ion-col>
+      
+    </ion-row>
+ 
+  </ion-grid>
 
+  <div class="button-container">
     <ion-button expand="block" class="register-button">
       Registrar
     </ion-button>

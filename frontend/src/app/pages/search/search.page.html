@@ -1,0 +1,42 @@
+<ion-content>
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    (ionChange)="searchBooks($event)"
+    debounce="500"
+    placeholder="Buscar libros por título o autor..."
+    class="search-bar"
+    show-clear-button="always" value="Always Show"
+  ></ion-searchbar>
+
+  <div class="container">
+    <div *ngIf="loading" class="loading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando resultados...</p>
+    </div>
+
+    <div *ngIf="searched && !loading">
+      <ion-list lines="full" *ngIf="searchResults.length > 0">
+        <ion-item *ngFor="let book of searchResults" detail>
+          <ion-label>
+            <h2>{{ book.title }}</h2>
+            <p>{{ book.author }}</p>
+            <p class="description">{{ book.description }}</p>
+            <p class="details">Año: {{ book.publicationYear }}</p>
+            <p class="details">Género: {{ book.genre }}</p>
+          </ion-label>
+          <ion-button fill="outline" slot="end" (click)="viewBookDetails(book)">
+            Detalles
+          </ion-button>
+        </ion-item>
+      </ion-list>
+
+      <div *ngIf="searchResults.length === 0" class="no-results">
+        <p>No se encontraron libros que coincidan con tu búsqueda.</p>
+      </div>
+    </div>
+
+    <div *ngIf="!searched && !searchQuery.trim()">
+      <p class="hint">Ingresa un término de búsqueda para comenzar a buscar libros.</p>
+    </div>
+  </div>
+</ion-content>

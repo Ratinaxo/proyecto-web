@@ -1,112 +1,133 @@
+.register-page {
+  --background: #7a855e;
+  padding: 16px;
 
-  ion-content.register-page {
-    --background: #7a855e;
+  .top-text {
+    margin-top: 5rem;
+    text-align: center;
+    margin-bottom: 40px;
 
-    display: flex;
-    justify-content: center;   /* eje horizontal */
-    align-items: flex-start;    /* eje vertical al “inicio” */
-      /* <— ajusta este valor hasta que te guste */
-
-  
-    .top-text {
-      color: #2c2c2c;
-      text-align: center;
-      margin-bottom: 2rem;
-      margin-top: 6rem;
-
-      
     h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin: 0;
-      line-height: 1.2;
+      color: #2c2c2c;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
     p {
-      font-size: 1.8rem;
-      margin: 0.5rem 0 0 0;
-      opacity: 0.9;
+      color: #2c2c2c;
+      font-size: 1.1rem;
+      margin: 0;
     }
-    }
+  }
 
 
-
-
-    .form-container {
-      width: 90%;
-      max-width: 700px;
-      background: #e6eed9;
-      border-radius: 12px;
-      padding: 2rem;
-      margin: 0 auto; /* solo centrado horizontal */
-      margin-top: 2rem; /* solo centrado vertical */
-      
     
-    }
   
-    .fields-wrapper {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-  
-      .column {
-        flex: 1;
-  
-        .input-item {
-          --background: #ffffff;
-          --border-radius: 8px;
-          --border-radius: 2rem;
-          height: 3.7rem;
-          margin-bottom: 1rem;
-          padding-left: 0.75rem;
-          padding-right: 0.75rem;
+    
+  }
 
-          
-  
-          ion-label {
-            top: 0.6rem;
-            font-size: 0.9rem;
-            color:#000000;
-          }
-          ion-input {
-            font-size: 0.9rem;
-            color: #000000;
-          }
-  
-          /* padding extra para el select */
-          ion-select {
-            --padding-start: 0.75rem;
-            --padding-end: 0.75rem;
-            color:#000000;
-          }
-          ion-select .select-text {
-            padding-left: 0.75rem;
-          }
-        }
-  
-        .terms-item {
-          height: auto;
-          
-          padding-bottom: 0.5rem;
-          ion-checkbox {
-            --size: 1rem;
-          }
-          ion-label {
-            margin-left: 0.5rem;
-            font-size: 0.9rem;
-            color: rgba(0, 0, 0, 0.8);
-          }
-        }
+  .form-container {
+    background: #e6eed9;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    ion-row {
+      margin-bottom: 10px;
+    }
+    
+ 
+
+    .input-item {
+      --background: white;
+      --border-radius: 10px;
+      --padding-start: 15px;
+      --padding-end: 15px;
+      margin: 8px 0;
+
+
+      ion-label {
+        color: black;
+        font-size: 0.9rem;
+        transform: translateY(12px);
+      }
+
+      ion-input, ion-select {
+        --padding-top: 15px;
+        --padding-bottom: 8px;
+        color: #2c3e50;
+        font-size: 0.95rem;
+      }
+
+      ion-select::part(icon) {
+        color: #7f8c8d;
       }
     }
-  
+
+    .terms-item {
+      --background: transparent;
+      --padding-start: 0;
+      margin-top: 15px;
+
+      ion-checkbox {
+        --background: #2c2c2c;
+        --border-radius: 10px;
+        --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --color: white;
+        height: 20px;
+        width: 20px;
+        margin-top: 1.5rem;
+        --border-color: #2c2c2c;
+
+      }
+
+      ion-label {
+        color: black;
+        font-size: 0.9rem;
+        white-space: normal;
+      }
+    }
+  }
+
+  .button-container {
+    padding: 20px;
+
     .register-button {
-      --background: #000000;
-      --border-radius: 6px;
-      height: 3.5rem;
-      font-size: 1rem;
+      --background: #2c2c2c;
+      --border-radius: 10px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --color: white;
+      height: 50px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
       font-weight: 600;
-      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s ease;
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// Ajustes responsivos
+@media (max-width: 768px) {
+  .form-container {
+    ion-col {
+      flex: 0 0 100% !important;
+      width: 100% !important;
+    }
+    
+    ion-row {
+      flex-wrap: wrap;
     }
   }
   
+  .terms-item {
+    margin-top: 20px !important;
+  }
+}
