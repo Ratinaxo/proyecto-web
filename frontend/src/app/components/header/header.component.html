@@ -1,20 +1,22 @@
 <ion-header [translucent]="true">
-  <ion-toolbar class="booktoc-header">
-    <div class="logo-container">
-      <ion-button routerLink="/home" class="back-button" fill="clear">
-        <ion-text color="light" class="back-text">Booktoc</ion-text>
-      </ion-button>
-    </div>
-    <ion-buttons slot="primary" class="back-button">
-      <ion-button fill="clear" routerLink="/login">
-        <p>Login</p>
-      </ion-button>
-        <ion-button fill="clear" routerLink="/profile">
-          <p>Perfil</p>
-        </ion-button>
-        <ion-button fill="clear" routerLink="/search">
-          <p>Buscar</p>
-        </ion-button>
-    </ion-buttons>
+  <ion-toolbar class="header-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button class="home-button" fill="solid" routerLink="/home"><ion-text>BookToc</ion-text></ion-button>
+        </ion-col>
+        <div class="menu-buttons">
+          <ion-col><ion-button class="button" routerLink="/login">
+            Login
+          </ion-button></ion-col>
+          <ion-col><ion-button class="button" routerLink="/profile">
+            Perfil
+          </ion-button></ion-col>
+          <ion-col><ion-button class="button" routerLink="/search">
+            Buscar
+          </ion-button></ion-col>
+        </div>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
