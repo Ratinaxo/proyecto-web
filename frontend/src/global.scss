@@ -1,37 +1,181 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
+/* =================================================== */
+/* Sistema de diseño - Variables globales              */
+/* =================================================== */
 
-/* Core CSS required for Ionic components to work properly */
+// ----------------------------------------------------
+// 1. Variables base del sistema (nunca cambiarán)
+// ----------------------------------------------------
+:root {
+  // Colores primarios
+  --color-primary: #5d6c4d;
+  --color-primary-rgb: 93, 108, 77;
+  --color-primary-contrast: #ffffff;
+  
+  // Colores neutros (escala de grises)
+  --color-neutral-100: #181917;
+  --color-neutral-90: #2d2d2d;
+  --color-neutral-80: #404040;
+  --color-neutral-60: #7a7a7a;
+  --color-neutral-40: #a6a6a6;
+  --color-neutral-20: #e0e0e0;
+  --color-neutral-10: #f8f8f8;
+  
+  // Estados del sistema
+  --color-success: #2dd36f;
+  --color-warning: #ffc409;
+  --color-danger: #eb445a;
+}
+
+// ----------------------------------------------------
+// 2. Variables semánticas (propósito general)
+// ----------------------------------------------------
+:root {
+  // Globales
+  --app-background: var(--color-primary);
+  --app-text-color: var(--color-primary-contrast);
+  --app-border-radius: 8px;
+  
+  // Superficies
+  --surface-primary: var(--color-neutral-10);
+  --surface-secondary: var(--color-neutral-20);
+  
+  // Texto
+  --text-primary: var(--color-neutral-100);
+  --text-secondary: var(--color-neutral-60);
+  
+  // Inputs
+  --input-background: var(--surface-primary);
+  --input-border: var(--color-neutral-40);
+  --input-text: var(--text-primary);
+  
+  // Botones
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-primary-contrast);
+  
+  // Tarjetas
+  --card-background: var(--surface-primary);
+  --card-border: 1px solid var(--color-neutral-20);
+  
+  // Enlaces
+  --link-color: var(--color-primary);
+  --link-hover-opacity: 0.8;
+  
+  // Transiciones
+  --transition-speed: 0.3s;
+}
+
+// ----------------------------------------------------
+// 3. Modo oscuro (override de variables)
+// ----------------------------------------------------
+:root.dark-theme {
+  // Globales
+  --app-background: var(--color-neutral-100);
+  --app-text-color: var(--color-neutral-10);
+  
+  // Superficies
+  --surface-primary: var(--color-neutral-90);
+  --surface-secondary: var(--color-neutral-80);
+  
+  // Texto
+  --text-primary: var(--color-neutral-10);
+  --text-secondary: var(--color-neutral-40);
+  
+  // Inputs
+  --input-background: var(--color-neutral-80);
+  --input-border: var(--color-neutral-60);
+  --input-text: var(--text-primary);
+  
+  // Botones
+  --button-primary-bg: var(--color-neutral-80);
+  --button-primary-text: var(--color-neutral-10);
+  
+  // Tarjetas
+  --card-background: var(--color-neutral-90);
+  --card-border: 1px solid var(--color-neutral-80);
+  
+  // Enlaces
+  --link-color: var(--color-neutral-20);
+}
+
+/* =================================================== */
+/* Estilos base para componentes HTML/Ionic            */
+/* =================================================== */
+
+// Estilos globales
+body {
+  background-color: var(--app-background);
+  color: var(--app-text-color);
+  transition: 
+    background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
+}
+
+// Componentes Ionic
+ion-content {
+  --background: var(--app-background);
+  --color: var(--app-text-color);
+}
+
+ion-item {
+  --background: var(--input-background);
+  --color: var(--input-text);
+  --border-color: var(--input-border);
+}
+
+ion-button {
+  --transition: background-color var(--transition-speed) ease;
+}
+
+ion-card {
+  --background: var(--card-background);
+  border: var(--card-border);
+}
+
+// Componentes personalizados
+.app-input {
+  background: var(--input-background);
+  border: 1px solid var(--input-border);
+  color: var(--input-text);
+  border-radius: var(--app-border-radius);
+}
+
+.app-button {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border-radius: var(--app-border-radius);
+  transition: var(--transition-speed) ease;
+  
+  &:hover {
+    opacity: var(--link-hover-opacity);
+  }
+}
+
+/* =================================================== */
+/* Utilidades de diseño                                */
+/* =================================================== */
+.transition-all {
+  transition: all var(--transition-speed) ease;
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.bg-surface-primary {
+  background: var(--surface-primary);
+}
+
+.bg-surface-secondary {
+  background: var(--surface-secondary);
+}
+
+/* =================================================== */
+/* Importaciones de Ionic                              */
+/* =================================================== */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";

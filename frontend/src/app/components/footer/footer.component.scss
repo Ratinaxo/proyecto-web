@@ -1,9 +1,7 @@
 .footer-container {
-  --background: #181917;
-  color: #eaf2de;
-  text-align: start;
+  --background: var(--app-background);
+  --color: var(--app-text-color);
   text-align: center;
   font-size: 0.9rem;
   height: 2.5rem;
 }
-  

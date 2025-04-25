@@ -1,13 +1,40 @@
 .header-container {
-  --background: #181917;
+  --background: var(--app-background);
 }
 
-.home-button {
-  --background: #eaf2de;
-  --color: #181917;
-}
-
+.home-button,
 .button {
-  --background: #eaf2de;
-  --color: #181917;
+  --background: var(--surface-primary);
+  --color: var(--text-primary);
+}
+
+/* Ajuste de layout para .menu-buttons */
+.menu-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-width: 32px;
+  --min-height: 32px;
+  --border-radius: 50%;
+  
+  ion-icon {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-speed) ease, transform 0.2s ease;
+  }
+
+  &:hover ion-icon {
+    transform: scale(1.2);
+  }
+  
+  &.dark {
+    ion-icon {
+      color: var(--color-primary);
+    }
+  }
 }
