@@ -85,20 +85,20 @@
     padding: 20px;
 
     .register-button {
-      --background: var(--text-primary);
+      --background: var(--color-primary);
       --border-radius: 10px;
-      --box-shadow: 0 4px 6px rgba(var(--color-neutral-100-rgb), 0.1);
-      --color: var(--surface-primary);
+      box-shadow: 0 4px 6px rgba(93,108,77,0.3);
+      --color: var(--color-primary-contrast);
       height: 50px;
       margin: 0 auto;
       width: 50%;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      transition: transform 0.2s ease;
+      transition: background var(--transition-speed) ease;
 
-      &:active {
-        transform: scale(0.98);
+      &:hover {
+        --background: lighten(var(red), 50%);
       }
     }
   }
