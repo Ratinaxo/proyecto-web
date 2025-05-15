@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from 'src/app/interfaces/book'; // Importa la interfaz book
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Book } from 'src/app/interfaces/book';
+import { BookService } from 'src/app/services/book.service'; // Asegúrate de importar tu servicio
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -7,66 +9,60 @@ import { Book } from 'src/app/interfaces/book'; // Importa la interfaz book
   styleUrls: ['./search.page.scss'],
   standalone: false
 })
-export class SearchPage implements OnInit {
+export class SearchPage implements OnInit, OnDestroy {
   searchQuery = '';
-  searchResults: Book[] = []; // Usando la interfaz
+  searchResults: Book[] = [];
   loading = false;
   searched = false;
 
-  private books: Book[] = [
-    {
-      id: 1,
-      title: 'El Señor de los Anillos',
-      author: 'J.R.R. Tolkien',
-      description: 'Trilogía épica de fantasía...',
-      publicationYear: 1954,
-      genre: 'Fantasía'
-    },
-    {
-      id: 2,
-      title: '1984',
-      author: 'George Orwell',
-      description: 'Novela distópica clásica...',
-      publicationYear: 1949,
-      genre: 'Ciencia ficción'
-    },
-    // ... más libros
-  ];
+  private searchSub?: Subscription;
 
-  constructor() { }
+  constructor(private bookService: BookService) {}
 
-  searchBooks(event: any) {
-    if (!this.searchQuery.trim()) {
+  searchBooks() {
+    const query = this.searchQuery.trim();
+    if (!query) {
       this.searched = false;
       return;
     }
-  
+
     this.loading = true;
     this.searched = true;
-  
-    // Filtra los libros simulados
-    this.searchResults = this.books.filter(book => 
-      book.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-      book.author.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-  
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+
+    this.searchSub?.unsubscribe(); // Cancela búsquedas anteriores si existen
+    this.searchSub = this.bookService.searchBooksQuery(query).subscribe({
+      next: (res: any) => {
+        // Mapear resultados a tu interfaz "Book"
+        this.searchResults = res.docs.map((doc: any, i: number) => ({
+          id: i,
+          title: doc.title,
+          author: doc.author_name?.join(', ') || 'Autor desconocido',
+          description: doc.first_sentence || 'Sin descripción',
+          publicationYear: parseInt(doc.first_publish_year) || 0,
+          genre: doc.subject?.[0] || 'Desconocido'
+        }));
+      },
+      error: (err) => {
+        console.error('Error al buscar libros:', err);
+        this.searchResults = [];
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
   }
+
   viewBookDetails(book: Book) {
     console.log('Viewing details for book:', book);
   }
 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.searchQuery = '';
     this.searchResults = [];
     this.loading = false;
     this.searched = false;
+    this.searchSub?.unsubscribe();
   }
-  
 }

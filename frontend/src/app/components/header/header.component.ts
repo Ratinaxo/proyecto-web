@@ -23,8 +23,10 @@ export class HeaderComponent  implements OnInit {
     this.themeService.toggleDarkMode();
   }
 
-
   
+  goToAdmin(){
+    this.router.navigate(['/admin']);
+  }
 
   ngOnInit() {}
 

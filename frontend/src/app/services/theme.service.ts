@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ThemeService {
   private darkMode = false;
   public darkModeSubject = new BehaviorSubject<boolean>(this.darkMode);
-
+  
   constructor(private storage: Storage) {
     this.storage.create();
     this.loadThemePreference();
