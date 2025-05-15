@@ -1,7 +1,7 @@
 FROM node:22-alpine
 
 RUN apk add --no-cache bash libc6-compat curl
-RUN npm install -g @angular/cli @ionic/cli
+RUN npm install -g @angular/cli @ionic/cli @ionic/storage-angular
 
 USER node
 

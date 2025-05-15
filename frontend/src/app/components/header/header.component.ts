@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,21 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class HeaderComponent  implements OnInit {
-
-  constructor(private router:Router) { }
+  darkMode: boolean = false;
+  constructor(private router:Router, private themeService: ThemeService, private changeDetector: ChangeDetectorRef) {
+    this.themeService.darkModeSubject.subscribe((isDark: boolean) => {
+      this.darkMode = isDark;
+      this.changeDetector.markForCheck();
+    });
+  }
   goToHome(){
     this.router.navigate(['/home']);
   }
+  toggleTheme() {
+    this.themeService.toggleDarkMode();
+  }
+
+  
   goToAdmin(){
     this.router.navigate(['/admin']);
   }
@@ -20,3 +31,4 @@ export class HeaderComponent  implements OnInit {
   ngOnInit() {}
 
 }
+

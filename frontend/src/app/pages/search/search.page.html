@@ -5,7 +5,8 @@
     debounce="500"
     placeholder="Buscar libros por título o autor..."
     class="search-bar"
-    show-clear-button="always" value="Always Show"
+    show-clear-button="always"
+    value="Always Show"
   ></ion-searchbar>
 
   <div class="container">
@@ -36,7 +37,9 @@
     </div>
 
     <div *ngIf="!searched && !searchQuery.trim()">
-      <p class="hint">Ingresa un término de búsqueda para comenzar a buscar libros.</p>
+      <p class="hint">
+        Ingresa un término de búsqueda para comenzar a buscar libros.
+      </p>
     </div>
   </div>
 </ion-content>

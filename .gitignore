@@ -32,6 +32,7 @@ frontend/bazel-out
 # Node
 frontend/.node_modules
 frontend/node_modules
+frontend/node_modules/
 frontend/npm-debug.log
 frontend/yarn-error.log
 

@@ -7,15 +7,29 @@
           <ion-button class="admin-button" fill="solid" routerLink="/admin"><ion-text>Admin</ion-text></ion-button>
         </ion-col>
         <div class="menu-buttons">
-          <ion-col><ion-button class="button" routerLink="/login">
-            Login
-          </ion-button></ion-col>
-          <ion-col><ion-button class="button" routerLink="/profile">
-            Perfil
-          </ion-button></ion-col>
-          <ion-col><ion-button class="button" routerLink="/search">
-            Buscar
-          </ion-button></ion-col>
+          <ion-col
+            ><ion-button class="button" routerLink="/login">
+              Login
+            </ion-button></ion-col
+          >
+          <ion-col
+            ><ion-button class="button" routerLink="/profile">
+              Perfil
+            </ion-button></ion-col
+          >
+          <ion-col
+            ><ion-button class="button" routerLink="/search">
+              Buscar
+            </ion-button></ion-col
+          >
+
+          <ion-button
+            class="theme-toggle-button"
+            fill="clear"
+            (click)="toggleTheme()"
+          >
+            <ion-icon [name]="darkMode ? 'sunny' : 'moon'"></ion-icon>
+          </ion-button>
         </div>
       </ion-row>
     </ion-grid>

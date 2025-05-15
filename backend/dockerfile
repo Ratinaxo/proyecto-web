@@ -1,6 +1,6 @@
     FROM python:3.13
 
-    WORKDIR /usr/src/backend
+    WORKDIR /usr/src/app
 
     RUN apt-get update && apt-get install --no-install-recommends netcat-openbsd && rm -rf /var/lib/apt/lists/*
 

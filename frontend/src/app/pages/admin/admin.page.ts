@@ -68,7 +68,7 @@ export class AdminPage implements OnInit {
     if (this.addBookForm.invalid) { return; }
     const newBook = this.addBookForm.value;
 
-    this.apiService.modifyBook(newBook).subscribe({
+    this.apiService.modifyBook(newBook.id, newBook).subscribe({
       next: () => {
         this.toastController.create({
             message: `Libro modificado correctamente`,
