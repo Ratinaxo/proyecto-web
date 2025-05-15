@@ -1,0 +1,8 @@
+#requirements for container flask backend
+Flask
+flask-cors
+pymysql
+Flask-SQLAlchemy
+python-dotenv
+cryptography
+flask-migrate

@@ -1,0 +1,44 @@
+<ion-content fullscreen="true">
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size-md="6" size-lg="4">
+        <form (ngSubmit)="onSubmitAdd()" [formGroup]="addBookForm">
+          <ion-item>
+            <ion-label position="floating">Título</ion-label>
+            <ion-input type="text" formControlName="title"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Autor</ion-label>
+            <ion-input type="text" formControlName="author"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Fecha de publicación</ion-label>
+            <ion-input type="text" formControlName="year"></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" [disabled]="addBookForm.invalid">
+            Agregar Libro
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size-md="6" size-lg="4">
+        <form (ngSubmit)="onSubmitDel()" [formGroup]="delBookForm">
+          <ion-item>
+            <ion-label position="floating">ID</ion-label>
+            <ion-input type="floating" formControlName="id"></ion-input>
+          </ion-item>
+          <ion-button expand="block" type="submit" [disabled]="delBookForm.invalid">
+            Borrar Libro
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

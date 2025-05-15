@@ -13,6 +13,9 @@ export class HeaderComponent  implements OnInit {
   goToHome(){
     this.router.navigate(['/home']);
   }
+  goToAdmin(){
+    this.router.navigate(['/admin']);
+  }
 
   ngOnInit() {}
 
