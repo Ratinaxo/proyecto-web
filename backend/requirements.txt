@@ -1,8 +1,8 @@
 #requirements for container flask backend
-Flask
-flask-cors
-pymysql
-Flask-SQLAlchemy
-python-dotenv
-cryptography
-flask-migrate
+Flask==3.1.1
+flask-cors==5.0.1
+pymysql==1.4.6
+Flask-SQLAlchemy==3.1.1
+python-dotenv==1.1.0
+cryptography==44.0.3
+flask-migrate==4.1.0

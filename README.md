@@ -96,5 +96,10 @@ Sistema de recomendación de libros basado en intereses del usuario, historial d
 - **Ionic Framework (v7+)**: Componentes UI multiplataforma.  
 - **Angular (v15+)**: Gestión de estados y enrutamiento.  
 
+### Backend y base de datos
+- **Python (V3.13)**
+- **Flask (V3.1.1)**
+- **MySQL (V9.0)**
+
 ---
 
