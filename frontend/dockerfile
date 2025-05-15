@@ -4,10 +4,13 @@ RUN apk add --no-cache bash libc6-compat curl
 RUN npm install -g @angular/cli @ionic/cli @ionic/storage-angular
 
 USER node
-
 WORKDIR /usr/src/app
 
-COPY . .
+COPY --chown=node:node package*.json ./
+
+RUN npm install
+
+COPY --chown=node:node . .
 
 EXPOSE 8100 4200
 
