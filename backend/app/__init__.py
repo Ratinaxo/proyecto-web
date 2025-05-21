@@ -7,22 +7,23 @@ import os
 
 db = SQLAlchemy()
 migrate = Migrate()
-
 def create_server():
 	"""Create and configure the Flask serverlication."""
+	
+	
 	load_dotenv()
 	server = Flask(__name__)
 	CORS(server)
 	server.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
-	
+
 	db.init_app(server)
 	migrate.init_app(server, db)
-	
- 	# Register the models to the db
-  
+
+	# Register the models to the db
 	import app.models
+
 	import app.routes as routes
-	
+
 	for bp in getattr(routes, "__all__", []):
 		try:
 			# Register the blueprint

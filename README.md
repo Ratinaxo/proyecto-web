@@ -93,11 +93,12 @@ Sistema de recomendación de libros basado en intereses del usuario, historial d
 ## Tecnologías y Librerías  
 
 ### Frontend  
-- **Ionic Framework (v7+)**: Componentes UI multiplataforma.  
-- **Angular (v15+)**: Gestión de estados y enrutamiento.  
+- **Node.js (V22)**: Se utiliza la node:imagen 22-alpine de docker debido a que no posee vulnerabilidades conocidas
+- **Ionic Framework (v8)**: Componentes UI multiplataforma.  
+- **Angular (V18)**: Gestión de estados y enrutamiento.  
 
 ### Backend y base de datos
-- **Python (V3.13)**
+- **Python (V3.20):** Se utiliza la imagen alpine3.20 de docker debido a que no posee vulnerabilidades conocidas.
 - **Flask (V3.1.1)**
 - **MySQL (V9.0)**
 

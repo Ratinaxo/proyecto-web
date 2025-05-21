@@ -1,4 +1,3 @@
-
 from app.models.book import Book
 from app import db
 

@@ -11,5 +11,5 @@ done
 echo "MySQL is up and running!"
 
 flask db upgrade
-
+python -m scripts.dbSeed
 exec flask run --host=0.0.0.0

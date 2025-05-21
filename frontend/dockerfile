@@ -1,7 +1,7 @@
 FROM node:22-alpine
 
 RUN apk add --no-cache bash libc6-compat curl
-RUN npm install -g @angular/cli @ionic/cli @ionic/storage-angular
+RUN npm install -g "@angular/cli@18.0.0" "@ionic/cli@latest" "@ionic/storage-angular@4.0.0"
 
 USER node
 WORKDIR /usr/src/app
