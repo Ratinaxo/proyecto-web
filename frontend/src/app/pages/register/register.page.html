@@ -9,14 +9,14 @@
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Nombre</ion-label>
-          <ion-input placeholder="Juan"></ion-input>
+          <ion-input [(ngModel)]="name" placeholder="Juan"></ion-input>
         </ion-item>
       </ion-col>
 
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" placeholder="usuario@dominio.com"></ion-input>
+          <ion-input type="email" [(ngModel)]="email" placeholder="usuario@dominio.com"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -25,14 +25,14 @@
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">RUT</ion-label>
-          <ion-input placeholder="12.345.678‑9"></ion-input>
+          <ion-input [(ngModel)]="rut" placeholder="12.345.678‑9"></ion-input>
         </ion-item>
       </ion-col>
 
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" placeholder="••••••••"></ion-input>
+          <ion-input type="password" [(ngModel)]="password" placeholder="••••••••"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -41,7 +41,7 @@
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Región</ion-label>
-          <ion-select placeholder="Valparaíso">
+          <ion-select [(ngModel)]="region" placeholder="Valparaíso">
             <ion-select-option>Valparaíso</ion-select-option>
             <ion-select-option>Metropolitana</ion-select-option>
           </ion-select>
@@ -51,7 +51,7 @@
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Confirmar contraseña</ion-label>
-          <ion-input type="password" placeholder="••••••••"></ion-input>
+          <ion-input type="password" [(ngModel)]="confirmPassword" placeholder="••••••••"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -60,7 +60,7 @@
       <ion-col >
         <ion-item lines="none" class="input-item">
           <ion-label position="floating">Comuna</ion-label>
-          <ion-select placeholder="Valparaíso">
+          <ion-select [(ngModel)]="commune" placeholder="Valparaíso">
             <ion-select-option>Valparaíso</ion-select-option>
             <ion-select-option>Viña del Mar</ion-select-option>
           </ion-select>
@@ -78,7 +78,7 @@
   </ion-grid>
 
   <div class="button-container">
-    <ion-button expand="block" class="register-button">
+    <ion-button expand="block" class="register-button" (click)="register()">
       Registrar
     </ion-button>
   </div>

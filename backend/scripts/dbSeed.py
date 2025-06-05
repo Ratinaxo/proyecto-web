@@ -2,6 +2,7 @@ import os
 from app import create_server, db
 from app.models.book import Book
 from app.models.user import User
+from werkzeug.security import generate_password_hash
 
 # Datos de ejemplo a insertar
 BOOKS = [
@@ -37,9 +38,24 @@ BOOKS = [
 ]
 
 USERS = [
-    {"username": "foo", "password": "bar", "email": "foo@foobar.com", "isAdmin": False},
-    {"username": "user", "password": "password", "email": "user@mail.com", "isAdmin": False},
-    {"username": "admin", "password": "admin", "email": "admin@superadmin.com", "isAdmin": True},
+    {
+    "commune": "Valparaíso",
+    "email": "admin@admin.com",
+    "isAdmin": True,
+    "name": "admin",
+    "password": f"{generate_password_hash("admin")}",
+    "region": "Valparaíso",
+    "rut": "12.345.678-9"
+  },
+   {
+    "commune": "Valparaíso",
+    "email": "test@test.com",
+    "isAdmin": False,
+    "name": f"{generate_password_hash("test")}",
+    "password": "test",
+    "region": "Valparaíso",
+    "rut": "11.111.111-k"
+  },
 ]
 
 def seed():
@@ -59,7 +75,7 @@ def seed():
 
         # Inserta usuarios si no existen
         for data in USERS:
-            exists = User.query.filter_by(username=data["username"]).first()
+            exists = User.query.filter_by(rut=data["rut"]).first()
             if not exists:
                 user = User(**data)
                 db.session.add(user)

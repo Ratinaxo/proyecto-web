@@ -1,2 +1,8 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+ion-content[fullscreen] {
+  --padding-top: calc(var(--ion-safe-area-top) + var(--ion-toolbar-height));
+}
+ion-content[fullscreen] {
+  margin-top: 0 !important;
+}

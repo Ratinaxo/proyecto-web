@@ -6,3 +6,4 @@ Flask-SQLAlchemy==3.1.1
 python-dotenv==1.1.0
 cryptography==44.0.3
 flask-migrate==4.1.0
+flask-jwt-extended

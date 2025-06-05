@@ -30,6 +30,14 @@
           >
             <ion-icon [name]="darkMode ? 'sunny' : 'moon'"></ion-icon>
           </ion-button>
+          
+          <ion-button
+            class="logout-button"
+            fill="clear"
+            (click)="logout()"
+          >
+            <ion-icon name="exit-outline"></ion-icon>
+          </ion-button>
         </div>
       </ion-row>
     </ion-grid>

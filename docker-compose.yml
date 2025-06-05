@@ -35,6 +35,9 @@ services:
       context: ./frontend
     ports:
       - "8100:8100"
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
     networks:
       - mynetwork
     environment:

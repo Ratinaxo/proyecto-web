@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThemeService } from 'src/app/services/theme.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +18,12 @@ export class HeaderComponent  implements OnInit {
   }
   goToHome(){
     this.router.navigate(['/home']);
+  }
+  
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
   toggleTheme() {
     this.themeService.toggleDarkMode();
