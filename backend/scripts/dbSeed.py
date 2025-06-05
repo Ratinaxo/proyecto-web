@@ -51,8 +51,8 @@ USERS = [
     "commune": "Valparaíso",
     "email": "test@test.com",
     "isAdmin": False,
-    "name": f"{generate_password_hash("test")}",
-    "password": "test",
+    "name": "test",
+    "password": f"{generate_password_hash("test")}",
     "region": "Valparaíso",
     "rut": "11.111.111-k"
   },
