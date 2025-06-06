@@ -2,13 +2,13 @@ from app.models.book import Book
 from app import db
 
 def get_all_books():
-    return [book.to_dict() for book in Book.query.all()]
+    return Book.query.all()
 
 def get_a_book(book_id):
     book = Book.query.get(book_id)
     if not book:
         return {"error": "Book not found!"}
-    return book.to_dict()
+    return book
 
 def add_a_book(data):
     new_book = Book(
@@ -18,7 +18,7 @@ def add_a_book(data):
     )
     db.session.add(new_book)
     db.session.commit()
-    return new_book.to_dict()
+    return new_book
 
 def update_a_book(book_id, data):
     book = Book.query.get(book_id)
@@ -31,7 +31,7 @@ def update_a_book(book_id, data):
     if "year" in data:
         book.year = data["year"]
     db.session.commit()
-    return book.to_dict()
+    return book
 
 def delete_a_book(book_id):
     book = Book.query.get(book_id)
