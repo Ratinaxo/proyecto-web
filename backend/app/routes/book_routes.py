@@ -1,6 +1,9 @@
 from flask import Blueprint, jsonify, request
 from app.controllers.book_controller import *
+from app.models.schemas import BookSchema
 
+book_schema = BookSchema()
+books_schema = BookSchema(many=True)
 bp = Blueprint("books", __name__, url_prefix="/api/books")
 
 @bp.get("/")
@@ -8,7 +11,7 @@ def get_books():
     """
     Get all books
     """
-    return jsonify(get_all_books()), 200
+    return books_schema(jsonify(get_all_books())), 200
 
 @bp.get("/<int:book_id>")
 def get_book(book_id):

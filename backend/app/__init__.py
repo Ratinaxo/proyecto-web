@@ -4,18 +4,21 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
+from flask_marshmallow import Marshmallow
+
 import os
 
 db = SQLAlchemy()
 migrate = Migrate()
+marsh = Marshmallow()
 def create_server():
 	"""Create and configure the Flask serverlication."""
-	
 	
 	load_dotenv()
 	server = Flask(__name__)
 	server.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 	jwt = JWTManager(server)
+	marsh.init_app(server)
 	CORS(server, origins=["http://localhost:8100"], supports_credentials=True)
 	server.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 

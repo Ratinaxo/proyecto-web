@@ -1,7 +1,11 @@
 from app.models import User
 from app.controllers.user_controller import register_user, authenticate_user
+from app.models.schemas import UserSchema
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
 
 bp = Blueprint("users", __name__, url_prefix="/api/users")
 
@@ -34,7 +38,7 @@ def me():
     user = User.query.get(current_user)
     if not user:
         return jsonify({"error": "User not found"}), 404
-    return jsonify(user.to_dict()), 200
+    return user_schema(jsonify(user)), 200
 
 @bp.get("/")
 @jwt_required()
@@ -43,7 +47,7 @@ def get_users():
     Get all users
     """
     users = User.query.all()
-    return jsonify([user.to_dict() for user in users]), 200
+    return users_schema(jsonify(users)), 200
 
 @bp.get("/<int:user_id>")
 @jwt_required()
@@ -54,4 +58,4 @@ def get_user(user_id):
     user = User.query.get(user_id)
     if not user:
         return jsonify({"error": "User not found"}), 404
-    return jsonify(user.to_dict()), 200
+    return user_schema(jsonify(user)), 200
