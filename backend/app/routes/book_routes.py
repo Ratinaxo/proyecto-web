@@ -11,14 +11,14 @@ def get_books():
     """
     Get all books
     """
-    return books_schema(jsonify(get_all_books())), 200
+    return books_schema.jsonify(get_all_books()), 200
 
 @bp.get("/<int:book_id>")
 def get_book(book_id):
     """
     Get a book by id
     """
-    return jsonify(get_a_book(book_id)), 200
+    return book_schema.jsonify(get_a_book(book_id)), 200
 
 @bp.post("/")
 def add_book():

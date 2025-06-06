@@ -38,7 +38,7 @@ def me():
     user = User.query.get(current_user)
     if not user:
         return jsonify({"error": "User not found"}), 404
-    return user_schema(jsonify(user)), 200
+    return user_schema.jsonify(user), 200
 
 @bp.get("/")
 @jwt_required()
@@ -47,7 +47,7 @@ def get_users():
     Get all users
     """
     users = User.query.all()
-    return users_schema(jsonify(users)), 200
+    return users_schema.jsonify(users), 200
 
 @bp.get("/<int:user_id>")
 @jwt_required()
@@ -58,4 +58,4 @@ def get_user(user_id):
     user = User.query.get(user_id)
     if not user:
         return jsonify({"error": "User not found"}), 404
-    return user_schema(jsonify(user)), 200
+    return user_schema.jsonify(user), 200
