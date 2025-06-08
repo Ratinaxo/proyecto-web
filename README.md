@@ -49,17 +49,14 @@ Sistema de recomendación de libros basado en intereses del usuario, historial d
 
 ## Requerimientos No Funcionales  
 
-### RNF-01: Tiempo de Respuesta  
-- Carga de recomendaciones y búsquedas en **menos de 2 segundos** (95% de los casos).  
-
-### RNF-02: Seguridad  
+### RNF-01: Seguridad  
 - Autenticación con JWT y encriptación de contraseñas.
 - Validación de RUT chileno en registro.  
 
-### RNF-03: Usabilidad  
+### RNF-02: Usabilidad  
 - Interfaz responsiva (móvil y web) con navegación intuitiva (máximo 3 clics para funciones principales).  
 
-### RNF-04: Compatibilidad  
+### RNF-03: Compatibilidad  
 - Compatible con:  
   - **Navegadores**: Chrome, Firefox, Safari, Edge (últimas versiones).  
   - **Dispositivos**: iOS, Android y pantallas ≥ 5 pulgadas.  
@@ -85,9 +82,71 @@ Sistema de recomendación de libros basado en intereses del usuario, historial d
 
 ---
 ## Definicion de la navegacion y experiencia de usuario.
-- Se incluye la opcion de cambiar entre modo claro y oscuro.
-- Diseno responsivo que se adapta al tamano de la pantalla.
-- Navegacion a traves de links en el header
+Navegación General
+
+El sistema de recomendación de libros implementa una navegación clara, eficiente y adaptada tanto a dispositivos móviles como a escritorio, utilizando rutas definidas en Angular. La navegación se organiza a través de un HeaderComponent visible en todas las vistas principales, que incluye accesos directos a secciones clave y un menú adaptable según el tipo de usuario (Usuario o Administrador).
+
+/login: Pantalla de autenticación, con validación.
+
+/registro: Formulario de registro para nuevos usuarios.
+
+/home: Pantalla de inicio que muestra las recomendaciones personalizadas según intereses.
+
+/search: Vista con filtros por título, autor, género y año.
+
+/book/:id: Muestra sinopsis, portada, reseñas y permite agregar a listas.
+
+/perfil: Acceso a preferencias, listas personalizadas e historial.
+
+/admin: Panel exclusivo para el administrador, con gestión de usuarios, libros y estadísticas.
+
+Flujo de Usuario
+
+Usuario nuevo:
+
+    Ingresa a /registro y completa el formulario (con validación de campos y RUT).
+
+    Accede a /home, donde recibe recomendaciones iniciales.
+
+    Utiliza /buscar para explorar libros por género, autor, etc.
+
+    Consulta el /detalle-libro/:id y lo agrega a una lista personalizada.
+
+    Deja una reseña y califica el libro si lo desea.
+
+Usuario recurrente:
+
+    Inicia sesión en /login.
+
+    Recibe recomendaciones actualizadas en /home.
+
+    Accede a /perfil para ver o modificar sus listas y preferencias.
+
+    Usa filtros de búsqueda avanzada para descubrir nuevas lecturas.
+
+Administrador:
+
+    Inicia sesión en /login.
+
+    Accede al /admin para:
+
+        Registrar nuevos libros (RF-ADM-01).
+
+        Editar o eliminar libros (RF-ADM-02).
+
+        Gestionar usuarios (RF-ADM-03).
+
+Principios de UX aplicados
+
+    Navegación fluida: Se garantiza que las funciones principales estén disponibles en máximo 3 clics.
+
+    Diseño responsivo: Adaptable a pantallas de 5 pulgadas o más, con uso de Ionic para asegurar una experiencia homogénea en iOS y Android.
+
+    Modo claro/oscuro: Alternancia entre ambos modos desde el header, persistente en sesiones.
+
+    Consistencia visual: Uso coherente de componentes UI, con retroalimentación visual inmediata (ej. al agregar libros o dejar una reseña).
+
+    Minimización del esfuerzo cognitivo: El usuario puede realizar acciones clave sin necesidad de redirigirse constantemente.
 
 
 ## Tecnologías y Librerías  
