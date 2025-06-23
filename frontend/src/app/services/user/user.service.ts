@@ -34,5 +34,20 @@ export class UserService {
     return this.http.post(`${this.apiBase2}/lists/leidos`, { book_id: bookId });
   }
 
+  // src/app/services/user/user.service.ts
+
+getUserPreferences() {
+  return this.http.get<any>(`${this.apiBase}/preferences`);
+}
+
+updateUserPreferences(preferredGenres: string[], favoriteAuthors: string[]) {
+  const payload = {
+    preferred_genre: preferredGenres,
+    favorite_authors: favoriteAuthors
+  };
+  return this.http.put(`${this.apiBase}/preferences`, payload);
+}
+
+
 
 }

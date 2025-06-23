@@ -1,4 +1,5 @@
 <ion-content fullscreen="true">
+  <!-- FORMULARIO AGREGAR LIBRO -->
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
@@ -26,16 +27,100 @@
     </ion-row>
   </ion-grid>
 
+  <!-- FORMULARIO BORRAR LIBRO -->
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
         <form (ngSubmit)="onSubmitDel()" [formGroup]="delBookForm">
           <ion-item>
-            <ion-label position="floating">ID</ion-label>
-            <ion-input type="floating" formControlName="id"></ion-input>
+            <ion-label position="floating">ID Libro</ion-label>
+            <ion-input type="text" formControlName="id"></ion-input>
           </ion-item>
           <ion-button expand="block" type="submit" [disabled]="delBookForm.invalid">
             Borrar Libro
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- FORMULARIO AGREGAR USUARIO -->
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size-md="6" size-lg="4">
+        <form (ngSubmit)="onSubmitAddUser()" [formGroup]="addUserForm">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Rol</ion-label>
+            <ion-select formControlName="role">
+              <ion-select-option value="user">Usuario</ion-select-option>
+              <ion-select-option value="admin">Administrador</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" [disabled]="addUserForm.invalid">
+            Agregar Usuario
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- FORMULARIO BORRAR USUARIO -->
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size-md="6" size-lg="4">
+        <form (ngSubmit)="onSubmitDeleteUser()" [formGroup]="delUserForm">
+          <ion-item>
+            <ion-label position="floating">ID Usuario</ion-label>
+            <ion-input type="text" formControlName="id"></ion-input>
+          </ion-item>
+          <ion-button expand="block" type="submit" [disabled]="delUserForm.invalid">
+            Borrar Usuario
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- FORMULARIO MODIFICAR USUARIO -->
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size-md="6" size-lg="4">
+        <form (ngSubmit)="onSubmitModifyUser()" [formGroup]="modUserForm">
+          <ion-item>
+            <ion-label position="floating">ID Usuario</ion-label>
+            <ion-input type="text" formControlName="id"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nuevo Nombre</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nuevo Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nuevo Rol</ion-label>
+            <ion-input type="text" formControlName="role"></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" [disabled]="modUserForm.invalid">
+            Modificar Usuario
           </ion-button>
         </form>
       </ion-col>

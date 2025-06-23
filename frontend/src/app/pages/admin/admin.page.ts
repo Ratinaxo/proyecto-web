@@ -13,19 +13,40 @@ import { ToastController } from '@ionic/angular';
 export class AdminPage implements OnInit {
   addBookForm!: FormGroup;
   delBookForm!: FormGroup;
+  addUserForm!: FormGroup;
+  delUserForm!: FormGroup;
+  modUserForm!: FormGroup;
 
   constructor(private toastController: ToastController,private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) { }
   
-  ngOnInit() {
-    this.addBookForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      author: ['', Validators.required],
-      year: ['', Validators.required],
-    })
-    this.delBookForm = this.formBuilder.group({
-      id : ['', Validators.required],
-    })
-  }
+ngOnInit() {
+  this.addBookForm = this.formBuilder.group({
+    title: ['', Validators.required],
+    author: ['', Validators.required],
+    year: ['', Validators.required],
+  });
+  this.delBookForm = this.formBuilder.group({
+    id : ['', Validators.required],
+  });
+
+  this.addUserForm = this.formBuilder.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    role: ['user', Validators.required],  
+  });
+
+  this.delUserForm = this.formBuilder.group({
+    id: ['', Validators.required],
+  });
+
+  this.modUserForm = this.formBuilder.group({
+    id: ['', Validators.required],
+    name: [''],
+    email: ['', [Validators.email]],
+    role: ['']
+  });
+}
   
   onSubmitAdd() {
     if (this.addBookForm.invalid) { return; }
@@ -81,4 +102,53 @@ export class AdminPage implements OnInit {
       }
     });
   }
+onSubmitAddUser() {
+  if (this.addUserForm.invalid) return;
+  const newUser = this.addUserForm.value;
+
+  this.apiService.addUser(newUser).subscribe({
+    next: () => {
+      this.toastController.create({
+        message: 'Usuario creado correctamente',
+        duration: 3000,
+      }).then(toast => toast.present());
+      this.addUserForm.reset();
+    },
+    error: err => console.error('Error creando usuario', err)
+  });
+}
+
+onSubmitDeleteUser() {
+  if (this.delUserForm.invalid) return;
+  const { id } = this.delUserForm.value;
+
+  this.apiService.deleteUser(id).subscribe({
+    next: () => {
+      this.toastController.create({
+        message: `Usuario ${id} eliminado`,
+        duration: 3000,
+      }).then(toast => toast.present());
+      this.delUserForm.reset();
+    },
+    error: err => console.error('Error eliminando usuario', err)
+  });
+}
+
+onSubmitModifyUser() {
+  if (this.modUserForm.invalid) return;
+  const { id, ...userData } = this.modUserForm.value;
+
+  this.apiService.modifyUser(id, userData).subscribe({
+    next: () => {
+      this.toastController.create({
+        message: 'Usuario modificado correctamente',
+        duration: 3000,
+      }).then(toast => toast.present());
+      this.modUserForm.reset();
+    },
+    error: err => console.error('Error modificando usuario', err)
+  });
+}
+
+
 }

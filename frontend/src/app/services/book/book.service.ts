@@ -25,6 +25,11 @@ export class BookService {
 
     return this.http.get<Book[]>(this.apiUrl, { params });
   }
+
+getAllBooks(): Observable<Book[]> {
+  return this.http.get<Book[]>('http://localhost:5000/api/books/');
+}
+
 getBookById(id: number): Observable<Book> {
   return this.http.get<Book>(`http://localhost:5000/api/books/${id}`);
 }

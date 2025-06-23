@@ -1,102 +1,117 @@
-@use "src/theme/variables";
-
-.searchbar {
-  padding: 1rem;
-  ion-searchbar {
-    --background: var(--surface-secondary);
-    --color: var(--text-primary);
-    border-radius: 12px;
-    margin-top: 4rem;
-  }
-}
-
-.top-section {
-  background: url('/assets/img/bg01.png') no-repeat center center;
-  background-size: cover;
+.home-content {
   padding: 1.5rem;
-  display: grid;
-  color: var(--text-primary);
+  overflow-y: auto;
 
-  .left-section {
-    width: 60%;
-    grid-area: text;
-    h1 {
-      font-size: 2rem;
-      margin: 0.1rem 0 1rem;
-      font-weight: bold;
-    }
-    h2 {
-      font-size: 1.5rem;
-      font-style: italic;
-    }
-    .quote {
-      margin: 0.5rem 0 1rem;
-      font-size: 0.95rem;
-      max-width: 85%;
-      background-color: var(--surface-primary);
-      border-radius: var(--app-border-radius);
-      padding: 0.5rem;
-    }
-  }
+.han-kang-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin: 3rem 0 2rem 0;
+  flex-wrap: wrap;
 
-  .top-image {
-    grid-area: image;
-    text-align: center;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+  .han-kang-image {
+    flex-shrink: 0;
 
-  .book-covers {
-    grid-area: books;
-    display: flex;
-    justify-content: space-around;
     img {
-      height: 80px;
-      border-radius: var(--app-border-radius);
-    }
-  }
-}
-
-.buttons {
-  --border-radius: 50%;
-  --color: var(--surface-primary);
-  --background: var(--text-primary);
-}
-
-.right-section {
-  text-align: center;
-  margin-top: 30%;
-}
-
-.for-you {
-  padding: 1.5rem 1rem;
-  background-color: var(--surface-primary);
-  border-top: 1px solid var(--input-border);
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    h2 {
-      font-size: 1.3rem;
-    }
-  }
-
-  ion-col {
-    text-align: center;
-    img {
-      width: 100%;
-      height: 160px;
+      width: 240px;
+      height: 240px;
       object-fit: cover;
-      border-radius: var(--app-border-radius);
-      box-shadow: 0 2px 5px rgba(var(--color-neutral-100-rgb), 0.1);
-      margin-bottom: 0.5rem;
+      border-radius: 50%;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      margin-top: 2rem;
     }
+  }
+
+  .han-kang-content {
+    flex: 1;
+    min-width: 300px;
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+    }
+
     p {
-      font-size: 0.9rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      max-width: 700px;
+    }
+
+    .han-kang-books {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .ver-mas {
+      margin-top: 1rem;
+      padding: 0.4rem 1rem;
+      border: none;
+      background-color: #444;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+
+  .section {
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      h2 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .more-btn {
+        padding: 0.4rem 1rem;
+        background-color: transparent;
+        border: 1px solid #333;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1.2rem;
+
+      .book-card {
+        text-align: center;
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 8px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+          margin-top: 0.5rem;
+          font-size: 0.9rem;
+        }
+      }
     }
   }
 }
