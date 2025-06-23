@@ -19,10 +19,10 @@ def create_server():
 	server.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 	jwt = JWTManager(server)
 	marsh.init_app(server)
-	CORS(server,
-     origins=["http://localhost:8100"],
+	CORS(server, resources={r"/api/*": {"origins": "http://localhost:8100"}},
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization", "X-Requested-With"])
+
 	server.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 
 	db.init_app(server)

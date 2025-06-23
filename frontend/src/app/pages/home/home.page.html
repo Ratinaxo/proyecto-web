@@ -1,49 +1,38 @@
-<ion-content [fullscreen]="true">
-  
-  <div class="searchbar">
-    <ion-searchbar placeholder="Título, autor o género..."></ion-searchbar>
+<ion-content class="home-content" scroll-y="true">
+
+<!-- Sección reorganizada -->
+<div class="han-kang-container">
+  <div class="han-kang-image">
+    <img src="assets/img/han.png" alt="Han Kang" />
   </div>
 
-  <section class="top-section">
-    <div class="left-section">
-      <h1>Premio Nobel de Literatura</h1>
-      <img class="top-img" src="assets/imgs/han1.jpg">
-      <h2>Han Kang</h2>
-      <p class="quote">“Por sus íntimas prosas poéticas que enfrentan traumas históricos y captan la fragilidad de la vida humana.”</p>
-      <ion-button class="buttons" size="small">Ver más</ion-button>
-    </div>
-    <div>
-      <ion-grid class="right-section">
-        <ion-row class="rows">
-          <ion-col><img src="assets/imgs/han1.jpg" alt="Libro 1"></ion-col>
-          <ion-col><img src="assets/imgs/han1.jpg" alt="Libro 1"></ion-col>
-          <ion-col><img src="assets/imgs/han1.jpg" alt="Libro 1"></ion-col>
-        </ion-row>
-        <ion-row class="rows">
-          <ion-col><img src="assets/imgs/han1.jpg" alt="Libro 1"></ion-col>
-          <ion-col><img src="assets/imgs/han1.jpg" alt="Libro 1"></ion-col>
-          <ion-col><img src="assets/imgs/han1.jpg" alt="Libro 1"></ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </section>
+  <div class="han-kang-content">
+    <h1>Han Kang</h1>
+    <p><em>“Por sus íntimas prosas poéticas que enfrentan traumas históricos y captan la fragilidad de la vida humana.”</em></p>
 
-  <section class="for-you">
+    <div class="han-kang-books">
+      <img src="assets/img/libro1.png" alt="Libro 1" >
+      <img src="assets/img/libro2.png" alt="Libro 2" >
+      <img src="assets/img/libro3.png" alt="Libro 3" >
+      <img src="assets/img/libro4.png" alt="Libro 4" >
+    </div>
+
+    <button class="ver-mas" (click)="goToSearch()">Ver más</button>
+  </div>
+</div>
+
+  <!-- Sección Para ti -->
+  <div class="section">
     <div class="section-header">
       <h2>Para ti</h2>
-      <ion-button class="buttons" size="small">Más libros</ion-button>
+      <button class="more-btn" (click)="goToSearch()">Más libros</button>
     </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4"><img src="assets/imgs/1984.jpg" /><p>1984</p></ion-col>
-        <ion-col size="4"><img src="assets/imgs/poppy-war.jpg" /><p>La guerra de las amapolas</p></ion-col>
-        <ion-col size="4"><img src="assets/imgs/pride.jpg" /><p>Orgullo y prejuicio</p></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="4"><img src="assets/imgs/pizarnik.jpg" /><p>Poesía completa</p></ion-col>
-        <ion-col size="4"><img src="assets/imgs/idiot.jpg" /><p>El idiota</p></ion-col>
-        <ion-col size="4"><img src="assets/imgs/hunger.jpg" /><p>Una cierta hambre</p></ion-col>
-      </ion-row>
-    </ion-grid>
-  </section>
+    <div class="book-grid">
+      <div *ngFor="let book of forYouBooks" class="book-card" (click)="goToDetail(book.id)">
+        <img [src]="book.cover_url" alt="{{ book.title }}">
+        <p>{{ book.title }}</p>
+      </div>
+    </div>
+  </div>
+
 </ion-content>

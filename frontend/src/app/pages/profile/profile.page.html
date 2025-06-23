@@ -22,6 +22,26 @@
   </ion-button>
 </ion-content>
 
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Preferencias</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Géneros preferidos (coma)</ion-label>
+      <ion-input [(ngModel)]="preferredGenresInput"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Autores favoritos (coma)</ion-label>
+      <ion-input [(ngModel)]="favoriteAuthorsInput"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="updatePreferences()">Guardar preferencias</ion-button>
+  </ion-card-content>
+</ion-card>
+
+
 <!-- Libros favoritos -->
 <ion-card>
   <ion-card-header>
@@ -36,6 +56,7 @@
     </div>
   </ion-card-content>
 </ion-card>
+
 
 <!-- Libros leídos -->
 <ion-card>

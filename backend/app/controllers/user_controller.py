@@ -41,11 +41,11 @@ def update_user_preferences(user_id, data):
     if not user:
         return None, "User not found"
 
-    genres = data.get("preferred_genres")
+    genres = data.get("preferred_genre")
     authors = data.get("favorite_authors")
 
     if genres is not None:
-        user.preferred_genres = ",".join(genres) if isinstance(genres, list) else genres
+        user.preferred_genre = ",".join(genres) if isinstance(genres, list) else genres
     if authors is not None:
         user.favorite_authors = ",".join(authors) if isinstance(authors, list) else authors
 
@@ -58,7 +58,7 @@ def get_user_preferences(user_id):
         return None, "User not found"
 
     return {
-        "preferred_genres": user.preferred_genres.split(",") if user.preferred_genres else [],
+        "preferred_genre": user.preferred_genre.split(",") if user.preferred_genre else [],
         "favorite_authors": user.favorite_authors.split(",") if user.favorite_authors else []
     }, None
 
