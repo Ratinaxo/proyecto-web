@@ -1,45 +1,32 @@
-<ion-content>
-  <ion-searchbar
-    [(ngModel)]="searchQuery"
-    (ionChange)="searchBooks()"
-    debounce="500"
-    placeholder="Buscar libros por título o autor..."
-    class="search-bar"
-    show-clear-button="always"
-    value="Always Show"
-  ></ion-searchbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Buscar Libros</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="container">
-    <div *ngIf="loading" class="loading">
-      <ion-spinner name="crescent"></ion-spinner>
-      <p>Cargando resultados...</p>
-    </div>
+<ion-content class="ion-padding">
+  <ion-input [(ngModel)]="query" placeholder="Buscar por título"></ion-input>
 
-    <div *ngIf="searched && !loading">
-      <ion-list lines="full" *ngIf="searchResults.length > 0">
-        <ion-item *ngFor="let book of searchResults" detail>
-          <ion-label>
-            <h2>{{ book.title }}</h2>
-            <p>{{ book.author }}</p>
-            <p class="description">{{ book.description }}</p>
-            <p class="details">Año: {{ book.publicationYear }}</p>
-            <p class="details">Género: {{ book.genre }}</p>
-          </ion-label>
-          <ion-button fill="outline" slot="end" (click)="viewBookDetails(book)">
-            Detalles
-          </ion-button>
-        </ion-item>
-      </ion-list>
+  <ion-item>
+    <ion-input [(ngModel)]="filters.author" placeholder="Autor"></ion-input>
+  </ion-item>
 
-      <div *ngIf="searchResults.length === 0" class="no-results">
-        <p>No se encontraron libros que coincidan con tu búsqueda.</p>
-      </div>
-    </div>
+  <ion-item>
+    <ion-input [(ngModel)]="filters.genre" placeholder="Género"></ion-input>
+  </ion-item>
 
-    <div *ngIf="!searched && !searchQuery.trim()">
-      <p class="hint">
-        Ingresa un término de búsqueda para comenzar a buscar libros.
-      </p>
-    </div>
-  </div>
+  <ion-item>
+    <ion-input [(ngModel)]="filters.year" type="number" placeholder="Año"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="onSearch()">Buscar</ion-button>
+
+  <ion-list *ngIf="books.length > 0">
+<ion-item *ngFor="let book of books" [routerLink]="['/book-details', book.id]">
+  <ion-label>
+    <h2>{{ book.title }}</h2>
+    <p>{{ book.author }} - {{ book.genre }} ({{ book.year }})</p>
+  </ion-label>
+</ion-item>
+  </ion-list>
 </ion-content>

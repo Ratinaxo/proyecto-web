@@ -13,7 +13,16 @@ export class LoginPage {
   email = '';
   password = '';
 
-  constructor(private router: Router, private apiService: ApiService, private alertController: AlertController) { }
+constructor(
+  private router: Router,
+  private apiService: ApiService,
+  private alertController: AlertController
+) {
+  const token = localStorage.getItem('token');
+  if (token) {
+    this.router.navigate(['/profile']);
+  }
+}
   
   goToRegister(){
     this.router.navigate(['/register']);

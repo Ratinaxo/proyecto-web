@@ -1,26 +1,53 @@
-<ion-content [fullscreen]="true">
-  <div class="profile-container">
-    <ion-grid class="profile-grid">
-      <ion-row class="ion-flex-wrap ion-justify-content-center responsive-column">
-        <!-- Profile Column -->
-        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-left">
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-          <ion-avatar>
-            <img alt="Silhouette" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-          <h2>User Description</h2>
-          <ion-card>
-            <ion-card-content>
-              Here's a small text description for the card content. Nothing more, nothing less.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+<ion-content class="ion-padding">
+  <h2>{{ user.name }}</h2>
+  <p>Email: {{ user.email }}</p>
+  <p>Región: {{ user.region }}</p>
+  <p>Comuna: {{ user.commune }}</p>
+  <p>Género preferido: {{ user.preferred_genre }}</p>
+  <p>Autores favoritos: {{ user.favorite_authors }}</p>
 
-        <!-- Description Column -->
-        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-          
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+  <ion-item>
+    <ion-label position="stacked">Descripción del perfil</ion-label>
+    <ion-textarea [(ngModel)]="description"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="full" (click)="updateDescription()">
+    Actualizar descripción
+  </ion-button>
 </ion-content>
+
+<!-- Libros favoritos -->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Libros favoritos</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="book-grid">
+      <div class="book-card" *ngFor="let libro of favoritos">
+        <img [src]="libro.cover_url || 'assets/placeholder.jpg'" alt="Portada" />
+        <p>{{ libro.title }}</p>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>
+
+<!-- Libros leídos -->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Libros leídos</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="book-grid">
+      <div class="book-card" *ngFor="let libro of leidos">
+        <img [src]="libro.cover_url || 'assets/placeholder.jpg'" alt="Portada" />
+        <p>{{ libro.title }}</p>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

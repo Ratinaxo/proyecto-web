@@ -1,5 +1,5 @@
 from app.models import User
-from app.controllers.user_controller import register_user, authenticate_user
+from app.controllers.user_controller import register_user, authenticate_user, get_user_preferences, update_user_preferences, update_user_profile
 from app.models.schemas import UserSchema
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
@@ -35,6 +35,7 @@ def login():
 @jwt_required()
 def me():
     current_user = get_jwt_identity()
+    print("JWT ID:", get_jwt_identity())
     user = User.query.get(current_user)
     if not user:
         return jsonify({"error": "User not found"}), 404
@@ -59,3 +60,44 @@ def get_user(user_id):
     if not user:
         return jsonify({"error": "User not found"}), 404
     return user_schema.jsonify(user), 200
+
+@bp.put("/preferences")
+@jwt_required()
+def preferences_update():
+    current_user_id = get_jwt_identity()
+    data = request.get_json() or {}
+
+    updated_user, error = update_user_preferences(current_user_id, data)
+    if error:
+        return jsonify({"error": error}), 404
+
+    return jsonify({
+        "message": "Preferences updated successfully",
+        "user": updated_user.to_dict()
+    })
+
+@bp.get("/preferences")
+@jwt_required()
+def preferences_get():
+    current_user_id = get_jwt_identity()
+
+    prefs, error = get_user_preferences(current_user_id)
+    if error:
+        return jsonify({"error": error}), 404
+
+    return jsonify(prefs)
+
+@bp.put("/profile")
+@jwt_required()
+def update_profile():
+    current_user_id = get_jwt_identity()
+    data = request.get_json() or {}
+
+    updated_user, error = update_user_profile(current_user_id, data)
+    if error:
+        return jsonify({"error": error}), 404
+
+    return jsonify({
+        "message": "Profile updated successfully",
+        "user": updated_user.to_dict()
+    })
