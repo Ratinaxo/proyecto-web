@@ -3,3 +3,17 @@
     flex-direction: column !important;
   }
 }
+
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.book-card {
+  width: 100px;
+  text-align: center;
+}
+.book-card img {
+  width: 100%;
+  border-radius: 8px;
+}

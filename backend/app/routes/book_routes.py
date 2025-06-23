@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.controllers.book_controller import *
 from app.models.schemas import BookSchema
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 book_schema = BookSchema()
 books_schema = BookSchema(many=True)
@@ -48,3 +49,19 @@ def delete_book(book_id):
     return jsonify(delete_a_book(book_id)), 200
 
 
+@bp.get("/search")
+def search():
+    filters = request.args.to_dict()
+    results, error = search_books(filters)
+    if error:
+        return jsonify({"error": error}), 400
+    return jsonify(results)
+
+@bp.get("/recommendations")
+@jwt_required()
+def recommendations():
+    user_id = get_jwt_identity()
+    results, error = get_recommendations(user_id)
+    if error:
+        return jsonify({"error": error}), 404
+    return jsonify(results)

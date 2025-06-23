@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles del Libro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="book-details-container">
+    <!-- Imagen del libro -->
+    <div>
+      <img [src]="book?.cover_url || 'assets/placeholder.jpg'" class="book-cover" />
+      <p class="community-score">Puntuación de la comunidad<br /><strong></strong></p>
+    </div>
+
+    <!-- Información del libro -->
+    <div class="book-info">
+      <h1>{{ book?.title }}</h1>
+      <h2>{{ book?.author }}</h2>
+      <div class="description">
+        <strong>Breve descripción del libro</strong>
+        <p>{{ book?.description || 'No hay descripción disponible.' }}</p>
+      </div>
+    </div>
+  </div>
+
+ <ion-card *ngIf="book">
+  <ion-card-header>
+    <ion-card-title>{{ book.title }}</ion-card-title>
+    <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-button fill="outline" color="primary" (click)="addToFavoritos(book.id)">
+      ❤️ Agregar a Favoritos
+    </ion-button>
+    <ion-button fill="outline" color="success" (click)="addToLeidos(book.id)">
+      ✅ Marcar como Leído
+    </ion-button>
+  </ion-card-content>
+</ion-card>
+
+
+  <!-- Formulario de reseña -->
+<div class="review-form">
+  <label>Deja una reseña o comentario:</label>
+  <ion-textarea [(ngModel)]="newReviewText" placeholder="Comentario..."></ion-textarea>
+
+  <label>Califica el libro:</label>
+  <div class="star-rating">
+    <ion-icon
+      *ngFor="let star of [1,2,3,4,5]"
+      [name]="newRating >= star ? 'star' : 'star-outline'"
+      (click)="setRating(star)"
+      class="star"
+    ></ion-icon>
+  </div>
+
+  <ion-button (click)="submitReview()">Comentar</ion-button>
+</div>
+
+
+  <!-- Reseñas de usuarios -->
+  <div class="review-section">
+    <h3>Reseñas de otros usuarios</h3>
+    <div class="reviews-grid">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        <div class="review-title">{{ review.title }}</div>
+        <div>{{ review.body }}</div>
+        <div class="review-meta">{{ review.reviewer }} - {{ review.date | date }}</div>
+      </div>
+    </div>
+  </div>
+
+<!-- Recomendaciones -->
+<div class="recommended-books">
+  <h3>Quizá te pueda gustar:</h3>
+  <div class="reviews-grid">
+    <div class="recommendation" *ngFor="let rec of recommendations" [routerLink]="['/book-details', rec.id]">
+      <img [src]="rec.cover_url || 'assets/placeholder.jpg'" alt="Libro recomendado" />
+      <span>{{ rec.title }}</span>
+    </div>
+  </div>
+</div>    
+
+

@@ -7,7 +7,8 @@ class Book(db.Model):
     author = db.Column(db.String(255), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
-
+    genre = db.Column(db.String(255), nullable=True)
+    reviews = db.relationship('Review', back_populates='book', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f"<Book {self.title}>"
@@ -19,4 +20,5 @@ class Book(db.Model):
             "author": self.author,
             "year": self.year,
             "created_at": self.created_at,
+            "genre": self.genre
         }

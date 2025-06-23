@@ -9,9 +9,15 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     rut = db.Column(db.String(12), nullable=False, unique=True)
+    description = db.Column(db.Text, nullable=True)
+
     region = db.Column(db.String(255), nullable=False)
     commune = db.Column(db.String(255), nullable=False)
- 
+    preferred_genre = db.Column(db.String(255), nullable=True)
+    favorite_authors = db.Column(db.String(255), nullable=True)
+    reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
+    
+    
     def __repr__(self):
         return f"<Name {self.name}, RUT {self.rut}"
     
@@ -25,5 +31,8 @@ class User(db.Model):
             "email": self.email,
             "rut": self.rut,
             "region": self.region,
-            "commune": self.commune
+            "commune": self.commune,
+            "preferred_genre": self.preferred_genre,
+            "favorite_authors": self.favorite_authors,
+            "description": self.description
         }
