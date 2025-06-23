@@ -3,6 +3,7 @@ from app.controllers.user_controller import register_user, authenticate_user, ge
 from app.models.schemas import UserSchema
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from sqlalchemy.exc import SQLAlchemyError
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -45,10 +46,24 @@ def me():
 @jwt_required()
 def get_users():
     """
-    Get all users
+    Get all users with optional pagination: ?page=1&per_page=10
     """
-    users = User.query.all()
-    return users_schema.jsonify(users), 200
+    try:
+        page = request.args.get("page", default=1, type=int)
+        per_page = request.args.get("per_page", default=10, type=int)
+
+        pagination = User.query.paginate(page=page, per_page=per_page, error_out=False)
+        users = pagination.items
+
+        return jsonify({
+            "users": users_schema.dump(users),
+            "total": pagination.total,
+            "page": pagination.page,
+            "pages": pagination.pages
+        }), 200
+
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
 
 @bp.get("/<int:user_id>")
 @jwt_required()
