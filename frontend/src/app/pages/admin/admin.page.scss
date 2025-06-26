@@ -1,26 +1,320 @@
+/* =================================================== */
+/* Panel de Administración - Estilos Mejorados        */
+/* =================================================== */
+
+// Variables específicas del panel admin
+:root {
+  --admin-panel-spacing: 2rem;
+  --admin-form-max-width: 420px;
+  --admin-section-gap: 3rem;
+  --admin-shadow-light: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --admin-shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --admin-gradient: linear-gradient(135deg, var(--surface-primary) 0%, var(--surface-secondary) 100%);
+}
+
+// Contenedor principal del panel
 ion-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  --background: var(--app-background);
+  --color: var(--app-text-color);
+  
+  // Patrón de fondo sutil
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(var(--color-primary-rgb), 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(var(--color-primary-rgb), 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
 }
 
+// Grid principal
 ion-grid {
-  width: 100%;
-  align-items: center;
-  margin-top: 10%;
+  padding: var(--admin-panel-spacing);
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  // Espaciado entre secciones
+  & + ion-grid {
+    margin-top: var(--admin-section-gap);
+  }
 }
 
+// Títulos de sección
+.admin-section-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background: var(--color-primary);
+      border-radius: 2px;
+    }
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0 0;
+  }
+}
+
+// Columnas
 ion-col {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  padding: 0.5rem;
 }
 
+// Formularios mejorados
 form {
   width: 100%;
-  max-width: 500px; // Tamaño máximo del formulario
-  padding: 20px;
-  background-color: #fff; // Fondo blanco para el formulario
-  border-radius: 8px; // Bordes redondeados
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra suave
+  max-width: var(--admin-form-max-width);
+  padding: 2rem;
+  background: var(--admin-gradient);
+  border-radius: 16px;
+  box-shadow: var(--admin-shadow-medium);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+  transition: all var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden;
+  
+  // Efecto hover
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  }
+  
+  // Brillo sutil en la parte superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(var(--color-primary-rgb), 0.3) 50%, 
+      transparent 100%);
+  }
+}
+
+// Items del formulario
+ion-item {
+  --background: transparent;
+  --color: var(--input-text);
+  --border-color: var(--input-border);
+  --border-width: 0 0 1px 0;
+  --inner-padding-top: 16px;
+  --inner-padding-bottom: 16px;
+  --padding-start: 0;
+  --padding-end: 0;
+  margin-bottom: 1.5rem;
+  border-radius: 8px 8px 0 0;
+  transition: all var(--transition-speed) ease;
+  
+  &:hover {
+    --border-color: var(--color-primary);
+  }
+  
+  &.item-has-focus {
+    --border-color: var(--color-primary);
+    --border-width: 0 0 2px 0;
+  }
+}
+
+// Labels
+ion-label {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color var(--transition-speed) ease;
+  
+  &.label-floating.label-focused {
+    color: var(--color-primary) !important;
+  }
+}
+
+// Inputs
+ion-input, ion-select {
+  --color: var(--input-text);
+  font-size: 1rem;
+  
+  input {
+    font-weight: 500;
+  }
+}
+
+// Select personalizado
+ion-select {
+  --padding-start: 0;
+  
+  &::part(icon) {
+    color: var(--color-primary);
+  }
+}
+
+// Botones mejorados
+ion-button {
+  --border-radius: 12px;
+  --box-shadow: var(--admin-shadow-light);
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-speed) ease;
+  
+  // Botón primario (agregar/modificar)
+  &:not([color]) {
+    --background: var(--color-primary);
+    --color: var(--color-primary-contrast);
+    
+    &:hover {
+      --background: rgba(var(--color-primary-rgb), 0.9);
+      transform: translateY(-1px);
+      --box-shadow: 0 6px 20px rgba(var(--color-primary-rgb), 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  // Botón de peligro (borrar)
+  &[color="danger"] {
+    --background: var(--color-danger);
+    --color: white;
+    
+    &:hover {
+      --background: #d33946;
+      --box-shadow: 0 6px 20px rgba(235, 68, 90, 0.3);
+    }
+  }
+  
+  // Estado deshabilitado
+  &[disabled] {
+    --background: var(--color-neutral-40);
+    --color: var(--color-neutral-60);
+    --box-shadow: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Estilos específicos por tipo de formulario
+.form-add-book, .form-add-user, .form-modify-user {
+  --admin-gradient: linear-gradient(135deg, 
+    var(--surface-primary) 0%, 
+    rgba(var(--color-primary-rgb), 0.02) 100%);
+}
+
+.form-delete-book, .form-delete-user {
+  --admin-gradient: linear-gradient(135deg, 
+    var(--surface-primary) 0%, 
+    rgba(235, 68, 90, 0.02) 100%);
+  
+  ion-button {
+    --background: var(--color-danger);
+    --color: white;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  
+  ion-grid {
+    padding: 1rem;
+  }
+  
+  form {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+  
+  .admin-section-title h2 {
+    font-size: 1.3rem;
+  }
+  
+  
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 1.25rem;
+  }
+  
+  ion-button {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+  }
+  
+
+}
+
+// Animaciones de entrada
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Aplicar animación a los formularios
+ion-grid {
+  animation: fadeInUp 0.6s ease-out;
+  
+  &:nth-child(2) { animation-delay: 0.1s; }
+  &:nth-child(3) { animation-delay: 0.2s; }
+  &:nth-child(4) { animation-delay: 0.3s; }
+  &:nth-child(5) { animation-delay: 0.4s; }
+}
+
+// Modo oscuro - ajustes específicos
+:root.dark-theme {
+  --admin-shadow-light: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --admin-shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --admin-gradient: linear-gradient(135deg, var(--surface-primary) 0%, var(--surface-secondary) 100%);
+  
+  form {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &::before {
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    }
+  }
 }

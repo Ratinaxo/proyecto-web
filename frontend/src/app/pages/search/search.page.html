@@ -5,28 +5,109 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-input [(ngModel)]="query" placeholder="Buscar por título"></ion-input>
-
-  <ion-item>
-    <ion-input [(ngModel)]="filters.author" placeholder="Autor"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-input [(ngModel)]="filters.genre" placeholder="Género"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-input [(ngModel)]="filters.year" type="number" placeholder="Año"></ion-input>
-  </ion-item>
-
-  <ion-button expand="full" (click)="onSearch()">Buscar</ion-button>
-
-  <ion-list *ngIf="books.length > 0">
-<ion-item *ngFor="let book of books" [routerLink]="['/book-details', book.id]">
-  <ion-label>
-    <h2>{{ book.title }}</h2>
-    <p>{{ book.author }} - {{ book.genre }} ({{ book.year }})</p>
-  </ion-label>
-</ion-item>
-  </ion-list>
+  <div class="container">
+    
+    <!-- Sección de búsqueda -->
+    <div class="search-section scale-in">
+      <h2 class="search-title">Encuentra tu próxima lectura</h2>
+      
+      <!-- Input principal de búsqueda -->
+      <div class="search-input main-search">
+        <ion-input 
+          [(ngModel)]="query" 
+          placeholder="Buscar por título..."
+          clearInput="true">
+        </ion-input>
+      </div>
+      
+      <!-- Filtros en grid -->
+      <div class="filters-grid">
+        <div class="search-input">
+          <ion-input 
+            [(ngModel)]="filters.author" 
+            placeholder="Autor"
+            clearInput="true">
+          </ion-input>
+        </div>
+        
+        <div class="search-input">
+          <ion-input 
+            [(ngModel)]="filters.genre" 
+            placeholder="Género"
+            clearInput="true">
+          </ion-input>
+        </div>
+        
+        <div class="search-input">
+          <ion-input 
+            [(ngModel)]="filters.year" 
+            type="number" 
+            placeholder="Año"
+            clearInput="true">
+          </ion-input>
+        </div>
+      </div>
+      
+      <!-- Botón de búsqueda -->
+      <ion-button 
+        expand="full" 
+        class="search-button"
+        (click)="onSearch()">
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Buscar Libros
+      </ion-button>
+    </div>
+    
+    <!-- Resultados -->
+    <div class="results-section" *ngIf="books.length > 0">
+      <div class="results-header fade-in">
+        <h3>Resultados de búsqueda</h3>
+        <span class="results-count">{{ books.length }} libro{{ books.length !== 1 ? 's' : '' }}</span>
+      </div>
+      
+      <ion-list>
+        <ion-item 
+          *ngFor="let book of books; let i = index" 
+          class="book-item"
+          [routerLink]="['/book-details', book.id]"
+          button>
+          <ion-label>
+            <h2 class="book-title">{{ book.title }}</h2>
+            <div class="book-details">
+              <span class="detail-item">{{ book.author }}</span>
+              <span class="detail-item">{{ book.genre }}</span>
+              <span class="detail-item">{{ book.year }}</span>
+            </div>
+          </ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <!-- Estado de carga -->
+    <div class="state-container loading" *ngIf="isLoading">
+      <div class="state-icon">📚</div>
+      <div class="state-title">Buscando libros...</div>
+      <div class="state-message">Estamos explorando nuestra biblioteca para ti</div>
+    </div>
+    
+    <!-- Sin resultados -->
+    <div class="state-container no-results" *ngIf="!isLoading && searchPerformed && books.length === 0">
+      <div class="state-icon">🔍</div>
+      <div class="state-title">No se encontraron resultados</div>
+      <div class="state-message">
+        Intenta ajustar tu búsqueda o usar términos diferentes
+      </div>
+    </div>
+    
+    <!-- Estado inicial -->
+    <div class="state-container hint" *ngIf="!isLoading && !searchPerformed">
+      <div class="state-icon">✨</div>
+      <div class="state-title">¡Explora nuestra colección!</div>
+      <div class="state-message">
+        Usa el formulario de arriba para buscar libros por título, autor, género o año
+      </div>
+    </div>
+    
+  </div>
 </ion-content>

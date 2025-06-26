@@ -18,10 +18,14 @@ export class SearchPage {
     year: ''
   };
   books: Book[] = [];
+  isLoading: boolean = false;
+  searchPerformed: boolean = false;
 
   constructor(private bookService: BookService) {}
 
   onSearch() {
+    this.isLoading = true;
+    this.searchPerformed = true;
       this.bookService.searchBooks(this.query, this.filters).subscribe((results: Book[]) => {
         this.books = results;
     });

@@ -1,9 +1,13 @@
 <ion-content fullscreen="true">
   <!-- FORMULARIO AGREGAR LIBRO -->
   <ion-grid>
+    <div class="admin-section-title">
+      <h2>Gestión de Libros</h2>
+      <p>Agregar nuevo libro al catálogo</p>
+    </div>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
-        <form (ngSubmit)="onSubmitAdd()" [formGroup]="addBookForm">
+        <form (ngSubmit)="onSubmitAdd()" [formGroup]="addBookForm" class="form-add-book">
           <ion-item>
             <ion-label position="floating">Título</ion-label>
             <ion-input type="text" formControlName="title"></ion-input>
@@ -20,6 +24,7 @@
           </ion-item>
 
           <ion-button expand="block" type="submit" [disabled]="addBookForm.invalid">
+            <ion-icon name="add-outline" slot="start"></ion-icon>
             Agregar Libro
           </ion-button>
         </form>
@@ -29,15 +34,20 @@
 
   <!-- FORMULARIO BORRAR LIBRO -->
   <ion-grid>
+    <div class="admin-section-title">
+      <h2>Eliminar Libro</h2>
+      <p>Remover libro del catálogo</p>
+    </div>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
-        <form (ngSubmit)="onSubmitDel()" [formGroup]="delBookForm">
+        <form (ngSubmit)="onSubmitDel()" [formGroup]="delBookForm" class="form-delete-book">
           <ion-item>
-            <ion-label position="floating">ID Libro</ion-label>
+            <ion-label position="floating">ID del Libro</ion-label>
             <ion-input type="text" formControlName="id"></ion-input>
           </ion-item>
-          <ion-button expand="block" type="submit" [disabled]="delBookForm.invalid">
-            Borrar Libro
+          <ion-button expand="block" type="submit" [disabled]="delBookForm.invalid" color="danger">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            Eliminar Libro
           </ion-button>
         </form>
       </ion-col>
@@ -46,16 +56,20 @@
 
   <!-- FORMULARIO AGREGAR USUARIO -->
   <ion-grid>
+    <div class="admin-section-title">
+      <h2>Gestión de Usuarios</h2>
+      <p>Crear nueva cuenta de usuario</p>
+    </div>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
-        <form (ngSubmit)="onSubmitAddUser()" [formGroup]="addUserForm">
+        <form (ngSubmit)="onSubmitAddUser()" [formGroup]="addUserForm" class="form-add-user">
           <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
+            <ion-label position="floating">Nombre completo</ion-label>
             <ion-input type="text" formControlName="name"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating">Email</ion-label>
+            <ion-label position="floating">Correo electrónico</ion-label>
             <ion-input type="email" formControlName="email"></ion-input>
           </ion-item>
 
@@ -65,15 +79,16 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating">Rol</ion-label>
-            <ion-select formControlName="role">
+            <ion-label position="floating">Rol del usuario</ion-label>
+            <ion-select formControlName="role" interface="popover">
               <ion-select-option value="user">Usuario</ion-select-option>
               <ion-select-option value="admin">Administrador</ion-select-option>
             </ion-select>
           </ion-item>
 
           <ion-button expand="block" type="submit" [disabled]="addUserForm.invalid">
-            Agregar Usuario
+            <ion-icon name="person-add-outline" slot="start"></ion-icon>
+            Crear Usuario
           </ion-button>
         </form>
       </ion-col>
@@ -82,15 +97,20 @@
 
   <!-- FORMULARIO BORRAR USUARIO -->
   <ion-grid>
+    <div class="admin-section-title">
+      <h2>Eliminar Usuario</h2>
+      <p>Remover cuenta de usuario del sistema</p>
+    </div>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
-        <form (ngSubmit)="onSubmitDeleteUser()" [formGroup]="delUserForm">
+        <form (ngSubmit)="onSubmitDeleteUser()" [formGroup]="delUserForm" class="form-delete-user">
           <ion-item>
-            <ion-label position="floating">ID Usuario</ion-label>
+            <ion-label position="floating">ID del Usuario</ion-label>
             <ion-input type="text" formControlName="id"></ion-input>
           </ion-item>
-          <ion-button expand="block" type="submit" [disabled]="delUserForm.invalid">
-            Borrar Usuario
+          <ion-button expand="block" type="submit" [disabled]="delUserForm.invalid" color="danger">
+            <ion-icon name="person-remove-outline" slot="start"></ion-icon>
+            Eliminar Usuario
           </ion-button>
         </form>
       </ion-col>
@@ -99,11 +119,15 @@
 
   <!-- FORMULARIO MODIFICAR USUARIO -->
   <ion-grid>
+    <div class="admin-section-title">
+      <h2>Modificar Usuario</h2>
+      <p>Actualizar información de usuario existente</p>
+    </div>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="4">
-        <form (ngSubmit)="onSubmitModifyUser()" [formGroup]="modUserForm">
+        <form (ngSubmit)="onSubmitModifyUser()" [formGroup]="modUserForm" class="form-modify-user">
           <ion-item>
-            <ion-label position="floating">ID Usuario</ion-label>
+            <ion-label position="floating">ID del Usuario</ion-label>
             <ion-input type="text" formControlName="id"></ion-input>
           </ion-item>
           <ion-item>
@@ -116,11 +140,15 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Nuevo Rol</ion-label>
-            <ion-input type="text" formControlName="role"></ion-input>
+            <ion-select formControlName="role" interface="popover">
+              <ion-select-option value="user">Usuario</ion-select-option>
+              <ion-select-option value="admin">Administrador</ion-select-option>
+            </ion-select>
           </ion-item>
 
           <ion-button expand="block" type="submit" [disabled]="modUserForm.invalid">
-            Modificar Usuario
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Actualizar Usuario
           </ion-button>
         </form>
       </ion-col>
