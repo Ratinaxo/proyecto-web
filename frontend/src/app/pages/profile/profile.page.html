@@ -1,74 +1,123 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goToEditProfile()">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h2>{{ user.name }}</h2>
-  <p>Email: {{ user.email }}</p>
-  <p>Región: {{ user.region }}</p>
-  <p>Comuna: {{ user.commune }}</p>
-  <p>Género preferido: {{ user.preferred_genre }}</p>
-  <p>Autores favoritos: {{ user.favorite_authors }}</p>
+<ion-content class="profile-content">
+  <!-- Sección principal compacta -->
+  <div class="profile-main">
+    <!-- Hero compacto -->
+    <div class="profile-hero">
+      <div class="profile-avatar">
+        <img src="assets/avatar-placeholder.jpg" alt="Avatar del usuario" />
+      </div>
+      <div class="profile-info">
+        <h1 class="username">{{ user.name }}</h1>
+        <div class="user-meta">
+          <span class="location">
+            <ion-icon name="location-outline"></ion-icon>
+            {{ user.region }}, {{ user.commune }}
+          </span>
+          <span class="email">
+            <ion-icon name="mail-outline"></ion-icon>
+            {{ user.email }}
+          </span>
+        </div>
+      </div>
+    </div>
 
-  <ion-item>
-    <ion-label position="stacked">Descripción del perfil</ion-label>
-    <ion-textarea [(ngModel)]="description"></ion-textarea>
-  </ion-item>
+    <!-- Grid de información -->
+    <div class="info-grid">
+      <!-- Descripción compacta -->
+      <div class="info-card description-card">
+        <h3>Sobre mí</h3>
+        <p class="description-text">{{ description || 'Aún no has añadido una descripción...' }}</p>
+      </div>
 
-  <ion-button expand="full" (click)="updateDescription()">
-    Actualizar descripción
-  </ion-button>
+      <!-- Géneros favoritos -->
+      <div class="info-card genres-card">
+        <h3>Géneros favoritos</h3>
+        <div class="genre-tags">
+          <span class="genre-tag" *ngFor="let genre of getGenresList()">
+            {{ genre }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Autores favoritos -->
+      <div class="info-card authors-card">
+        <h3>Autores favoritos</h3>
+        <p class="authors-text">{{ user.favorite_authors || 'No especificado' }}</p>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="info-card stats-card">
+        <h3>Estadísticas</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number">{{ leidos.length || 0 }}</span>
+            <span class="stat-label">Leídos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{{ favoritos.length || 0 }}</span>
+            <span class="stat-label">Por leer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de libros compacta -->
+    <div class="books-section">
+      <div class="books-header">
+        <div class="book-tabs">
+          <button 
+            class="tab-btn" 
+            [class.active]="activeTab === 'leidos'"
+            (click)="switchTab('leidos')">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            Leídos ({{ leidos.length || 0 }})
+          </button>
+          <button 
+            class="tab-btn" 
+            [class.active]="activeTab === 'favoritos'"
+            (click)="switchTab('favoritos')">
+            <ion-icon name="bookmark-outline"></ion-icon>
+            Por leer ({{ favoritos.length || 0 }})
+          </button>
+        </div>
+      </div>
+
+      <!-- Libros en carrusel horizontal -->
+      <div class="books-carousel" *ngIf="activeTab === 'leidos' && leidos.length > 0">
+        <div class="book-carousel-item" *ngFor="let libro of leidos; let i = index">
+          <div class="book-cover" (click)="viewBookDetails(libro)">
+            <img [src]="libro.cover_url || 'assets/placeholder.jpg'" alt="Portada" />
+          </div>
+          <p class="book-title">{{ libro.title }}</p>
+        </div>
+      </div>
+
+      <div class="books-carousel" *ngIf="activeTab === 'favoritos' && favoritos.length > 0">
+        <div class="book-carousel-item" *ngFor="let libro of favoritos; let i = index">
+          <div class="book-cover" (click)="viewBookDetails(libro)">
+            <img [src]="libro.cover_url || 'assets/placeholder.jpg'" alt="Portada" />
+          </div>
+          <p class="book-title">{{ libro.title }}</p>
+        </div>
+      </div>
+
+      <!-- Estado vacío -->
+      <div class="empty-state" *ngIf="(activeTab === 'leidos' && (!leidos || leidos.length === 0)) || 
+                                      (activeTab === 'favoritos' && (!favoritos || favoritos.length === 0))">
+        <ion-icon [name]="activeTab === 'leidos' ? 'book-outline' : 'bookmark-outline'"></ion-icon>
+        <p>{{ activeTab === 'leidos' ? 'Aún no has leído ningún libro' : 'No tienes libros en tu lista de lectura' }}</p>
+      </div>
+    </div>
+  </div>
 </ion-content>
-
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Preferencias</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-item>
-      <ion-label position="floating">Géneros preferidos (coma)</ion-label>
-      <ion-input [(ngModel)]="preferredGenresInput"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Autores favoritos (coma)</ion-label>
-      <ion-input [(ngModel)]="favoriteAuthorsInput"></ion-input>
-    </ion-item>
-
-    <ion-button expand="block" (click)="updatePreferences()">Guardar preferencias</ion-button>
-  </ion-card-content>
-</ion-card>
-
-
-<!-- Libros favoritos -->
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Libros favoritos</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <div class="book-grid">
-      <div class="book-card" *ngFor="let libro of favoritos">
-        <img [src]="libro.cover_url || 'assets/placeholder.jpg'" alt="Portada" />
-        <p>{{ libro.title }}</p>
-      </div>
-    </div>
-  </ion-card-content>
-</ion-card>
-
-
-<!-- Libros leídos -->
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Libros leídos</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <div class="book-grid">
-      <div class="book-card" *ngFor="let libro of leidos">
-        <img [src]="libro.cover_url || 'assets/placeholder.jpg'" alt="Portada" />
-        <p>{{ libro.title }}</p>
-      </div>
-    </div>
-  </ion-card-content>
-</ion-card>
